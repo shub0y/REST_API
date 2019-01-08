@@ -11,6 +11,7 @@ const orderRoutes = require('./api/routes/orders');
 mongoose.connect('mongodb://shub0y:shub0y@node-rest-shop-shard-00-00-bafpf.mongodb.net:27017,node-rest-shop-shard-00-01-bafpf.mongodb.net:27017,node-rest-shop-shard-00-02-bafpf.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin&retryWrites=true', {
     useMongoClient: true
 });
+mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
