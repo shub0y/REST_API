@@ -44,7 +44,25 @@ router.post('/signup', (req, res, nect) =>{
         })
     });
 
-    router.delete('/userId', (req, res, next) =>{
+    router.post('/login', (req, res, next)=>{
+        User.find({e,ail: req.body.email})
+        .exec()
+        .then(user => {
+            if(user.length < 1){
+                return res.status(401).json({
+                    message: 'Auth fail'
+                });
+            }             
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+    });
+
+    router.delete('/:userId', (req, res, next) =>{
         User
         .remove({_id: req.params.userId}) 
         .exec() 
@@ -57,7 +75,7 @@ router.post('/signup', (req, res, nect) =>{
             console.log(err);
             res.status(500).json({
                 error: err
-            })
+            });
         }); 
     });
 
